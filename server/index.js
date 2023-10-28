@@ -7,6 +7,7 @@ const cors = require("cors");
 
 const app = express();
 app.use(cors());
+
 app.use(bodyParser.json());
 
 // Postgres client setup
@@ -30,12 +31,15 @@ app.get("/", (req, res) => {
     res.send("Hi");
 });
 
+
 // get the values
 app.get("/values/all", async (req, res) => {
     const values = await pgClient.query("SELECT * FROM values");
+    console.log(values);
 
     res.send(values);
 });
+
 
 // now the post -> insert value
 app.post("/values", async (req, res) => {
